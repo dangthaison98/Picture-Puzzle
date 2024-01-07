@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - Water
   - UI
+  - Player
   - 
   - 
   - 
@@ -35,8 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - No Collider
   m_SortingLayers:
   - name: Default
     uniqueID: 0

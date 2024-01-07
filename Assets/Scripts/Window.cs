@@ -19,6 +19,7 @@ public class Window : MonoBehaviour
     {
         StopAllCoroutines();
         G1GameManager.instance.state = G1GameManager.GameState.Stop;
+        CharacterMove.instance.StaticRigidbody(true);
     }
     private void OnMouseDrag()
     {
@@ -39,5 +40,6 @@ public class Window : MonoBehaviour
             yield return null;
         }
         G1GameManager.instance.state = G1GameManager.GameState.Play;
+        CharacterMove.instance.StaticRigidbody(false);
     }
 }

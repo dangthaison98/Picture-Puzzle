@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
 {
+    public static CharacterMove instance;
     public Transform checkWallPoint;
     public Transform checkGroundPoint;
 
@@ -11,6 +12,7 @@ public class CharacterMove : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -37,6 +39,22 @@ public class CharacterMove : MonoBehaviour
     }
 
 
+    public void StaticRigidbody(bool isStatic)
+    {
+        if(!isStatic)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            gameObject.layer = 6;
+        }
+        else
+        {
+            rb.bodyType= RigidbodyType2D.Kinematic;
+            rb.velocity = Vector2.zero;
+            gameObject.layer = 31;
+        }
+    }
+
+    //Check
     public bool WallCheck()
     {
         return Physics2D.Raycast(checkWallPoint.position, transform.right, 0.02f, LayerMask.GetMask("Ground"));
