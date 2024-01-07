@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Window : MonoBehaviour
 {
     private Camera _camera;
     private Vector3 standPoint;
+
     private void Awake()
     {
         _camera = Camera.main;
@@ -20,7 +22,7 @@ public class Window : MonoBehaviour
     private void OnMouseDrag()
     {
         Vector2 newPos = _camera.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = Vector3.Lerp(transform.position, newPos, 15 * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, newPos, 50 * Time.deltaTime);
     }
     private void OnMouseUp()
     {
@@ -32,7 +34,7 @@ public class Window : MonoBehaviour
     {
         while (transform.position != standPoint)
         {
-            transform.position = Vector3.Lerp(transform.position, standPoint, 15 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, standPoint, 50 * Time.deltaTime);
             yield return null;
         }
     }
