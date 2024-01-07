@@ -16,6 +16,11 @@ public class CharacterMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (G1GameManager.instance.state == G1GameManager.GameState.Stop) 
+        {
+            return; 
+        }
+
         if (GroundCheck())
         {
             rb.velocity = transform.right * 50 * Time.fixedDeltaTime;
@@ -26,11 +31,15 @@ public class CharacterMove : MonoBehaviour
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        transform.parent = collision.transform;
+    }
 
 
     public bool WallCheck()
     {
-        return Physics2D.Raycast(checkWallPoint.position, Vector2.right, 0.01f, LayerMask.GetMask("Ground"));
+        return Physics2D.Raycast(checkWallPoint.position, transform.right, 0.02f, LayerMask.GetMask("Ground"));
     }
     public bool GroundCheck()
     {

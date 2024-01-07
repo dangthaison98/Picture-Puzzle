@@ -18,6 +18,7 @@ public class Window : MonoBehaviour
     private void OnMouseDown()
     {
         StopAllCoroutines();
+        G1GameManager.instance.state = G1GameManager.GameState.Stop;
     }
     private void OnMouseDrag()
     {
@@ -37,5 +38,6 @@ public class Window : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, standPoint, 50 * Time.deltaTime);
             yield return null;
         }
+        G1GameManager.instance.state = G1GameManager.GameState.Play;
     }
 }
