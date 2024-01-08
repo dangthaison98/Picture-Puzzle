@@ -12,6 +12,17 @@ public class G1GameManager : MonoBehaviour
     }
     public GameState state;
 
+    [HideInInspector] public List<Window> runningWindow = new List<Window>();
+    public void CheckPlayState(Window window)
+    {
+        runningWindow.Remove(window);
+        if(runningWindow.Count == 0)
+        {
+            state = GameState.Play;
+            CharacterMove.instance.StaticRigidbody(false);
+        }
+    }
+
     private void Awake()
     {
         instance = this;
