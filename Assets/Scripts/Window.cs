@@ -8,11 +8,20 @@ public class Window : MonoBehaviour
 {
     private Camera _camera;
     [HideInInspector] public Vector3 standPoint;
+    public GameObject invisibleWall;
 
     private void Awake()
     {
         _camera = Camera.main;
         standPoint = transform.position;
+        if(!Physics2D.CircleCast(transform.position + Vector3.right * 4, 0.1f, Vector2.down, 0f, LayerMask.GetMask("Window")))
+        {
+            Instantiate(invisibleWall, transform.position + Vector3.right * 4, Quaternion.identity);
+        }
+        if (!Physics2D.CircleCast(transform.position + Vector3.right * -4, 0.1f, Vector2.down, 0f, LayerMask.GetMask("Window")))
+        {
+            Instantiate(invisibleWall, transform.position + Vector3.right * -4, Quaternion.identity);
+        }
     }
 
     RaycastHit2D hit;
